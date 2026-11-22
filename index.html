@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#171717"><title>Pizzeria Pala d’Oro — Ordina online</title>
+<style>
+:root{--black:#171717;--panel:#22201d;--gold:#f1d84b;--red:#c94e4a;--cream:#fff8e7;--muted:#cfc8b5;--line:#514936}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--black);color:var(--cream);font-family:system-ui,-apple-system,sans-serif}
+header{text-align:center;padding:26px 14px 22px;background:linear-gradient(145deg,#292929,#111);border-bottom:1px solid #6b6032}
+.bolts{font-size:22px;color:#eee}.pizzeria{color:var(--red);font-size:clamp(18px,5vw,25px);font-weight:900;letter-spacing:3px;margin:2px auto 0}
+.brand{font-family:"Brush Script MT","Segoe Script",cursive;font-style:italic;font-size:clamp(48px,13vw,76px);font-weight:800;color:var(--gold);line-height:1.05;text-shadow:0 2px 0 #7a6821}
+.slice{display:inline-block;font-family:system-ui;font-style:normal;font-size:.52em;vertical-align:middle;transform:rotate(12deg)}
+.tag{font-size:10px;letter-spacing:2px;color:#e9dfbd;margin-top:9px}
+main{max-width:880px;margin:auto;padding:15px 13px 110px}.welcome{border:1px solid #75652e;background:#28251b;border-radius:14px;padding:13px;color:#f5e7b3;font-size:13px;margin-bottom:13px}
+nav{display:flex;gap:7px;overflow-x:auto;padding:4px 0 14px;position:sticky;top:0;background:var(--black);z-index:4;scrollbar-width:none}
+nav a{white-space:nowrap;text-decoration:none;border:1px solid var(--line);border-radius:22px;padding:9px 12px;color:var(--cream);font-size:12px;font-weight:700;background:#24221e}
+nav a:first-child{background:var(--gold);color:#17130a;border-color:var(--gold)}
+h2{font-family:Georgia,serif;color:var(--gold);font-size:24px;margin:19px 2px 10px}
+.products{display:grid;grid-template-columns:1fr;gap:9px}.product{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:12px}
+.product-copy{flex:1;min-width:0}.product h3{font-size:15px;margin:0 0 3px}.product p{font-size:11px;color:var(--muted);margin:0 0 5px;line-height:1.35}.product strong{color:var(--gold);font-size:14px}
+.add{width:38px;height:38px;border:0;border-radius:50%;background:var(--gold);color:#17130a;font-size:23px;font-weight:800}
+.cartbar{position:fixed;bottom:0;left:0;right:0;background:#171717f5;border-top:1px solid #65552c;padding:11px 13px calc(11px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:12px;z-index:8}
+.cartinfo{flex:1}.cartinfo small{display:block;color:var(--muted);font-size:11px}.cartinfo b{font-size:19px;color:var(--gold)}
+button.primary{border:0;border-radius:12px;background:var(--gold);color:#17130a;padding:13px 16px;font-weight:850}
+#checkout{display:none;margin-top:22px;background:var(--panel);border:1px solid var(--line);padding:14px;border-radius:16px}#checkout.open{display:block}
+label{display:block;color:var(--muted);font-size:12px;margin:10px 0 5px}input,select,textarea{width:100%;padding:11px;border-radius:9px;border:1px solid var(--line);background:#171717;color:white;font:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.line{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
+.qty button{background:#393328;color:white;border:1px solid var(--line);border-radius:6px;padding:3px 8px}.hint{font-size:11px;line-height:1.4;color:var(--muted)}
+@media(min-width:600px){.products{grid-template-columns:1fr 1fr}}
+</style></head><body>
+<header><div class="bolts">↯</div><div class="pizzeria">PIZZERIA</div><div class="brand">Pala <span class="slice">🍕</span><br>d’Oro</div><div class="tag">PASSIONE · TRADIZIONE · QUALITÀ</div></header>
+<main><div class="welcome">Benvenuto! Scegli le tue pizze preferite e aggiungile al carrello.</div>
+<nav><a href="#rosse">Pizze rosse</a><a href="#bianche">Pizze bianche</a><a href="#calzoni">Calzoni</a><a href="#pala">Pizza alla pala</a><a href="#bevande">Bevande</a><a href="#menu">Menù</a></nav>
+<section class="category" id="rosse"><h2>Pizze rosse</h2><div class="products"><article class="product">
+          <div class="product-copy"><h3>Marinara</h3>
+          <p>Pomodoro, aglio, origano, olio d’oliva</p><strong>€ 4,00</strong></div>
+          <button class="add" type="button" data-id="0" aria-label="Aggiungi Marinara">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Amatriciana</h3>
+          <p>Pomodoro, guanciale, pecorino</p><strong>€ 6,00</strong></div>
+          <button class="add" type="button" data-id="1" aria-label="Aggiungi Amatriciana">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Margherita</h3>
+          <p>Pomodoro, mozzarella, olio d’oliva</p><strong>€ 5,00</strong></div>
+          <button class="add" type="button" data-id="2" aria-label="Aggiungi Margherita">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Sbriciolata</h3>
+          <p>Pomodoro, mozzarella, salsiccia, parmigiano</p><strong>€ 7,00</strong></div>
+          <button class="add" type="button" data-id="3" aria-label="Aggiungi Sbriciolata">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Diavola</h3>
+          <p>Pomodoro, mozzarella, salame piccante</p><strong>€ 6,00</strong></div>
+          <button class="add" type="button" data-id="4" aria-label="Aggiungi Diavola">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Napoli</h3>
+          <p>Pomodoro, mozzarella, acciughe</p><strong>€ 7,00</strong></div>
+          <button class="add" type="button" data-id="5" aria-label="Aggiungi Napoli">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Contadina</h3>
+          <p>Pomodoro, mozzarella, salsiccia, peperoni</p><strong>€ 7,00</strong></div>
+          <button class="add" type="button" data-id="6" aria-label="Aggiungi Contadina">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Parmigiana</h3>
+          <p>Pomodoro, mozzarella, melanzane grigliate, parmigiano grattugiato, basilico, olio d’oliva</p><strong>€ 8,00</strong></div>
+          <button class="add" type="button" data-id="7" aria-label="Aggiungi Parmigiana">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Bufalina</h3>
+          <p>Pomodoro, mozzarella di bufala</p><strong>€ 8,00</strong></div>
+          <button class="add" type="button" data-id="8" aria-label="Aggiungi Bufalina">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Mediterranea</h3>
+          <p>Pomodoro, pomodori secchi, stracciatella, basilico fresco, olio EVO</p><strong>€ 9,00</strong></div>
+          <button class="add" type="button" data-id="9" aria-label="Aggiungi Mediterranea">+</button>
+        </article></div></section><section class="category" id="bianche"><h2>Pizze bianche</h2><div class="products"><article class="product">
+          <div class="product-copy"><h3>Pizza bianca</h3>
+          <p>Olio, origano, sale</p><strong>€ 3,00</strong></div>
+          <button class="add" type="button" data-id="10" aria-label="Aggiungi Pizza bianca">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Boscaiola</h3>
+          <p>Mozzarella, funghi, salsiccia</p><strong>€ 7,00</strong></div>
+          <button class="add" type="button" data-id="11" aria-label="Aggiungi Boscaiola">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Ortolana</h3>
+          <p>Mozzarella, verdure grigliate</p><strong>€ 7,00</strong></div>
+          <button class="add" type="button" data-id="12" aria-label="Aggiungi Ortolana">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Tonno e Cipolla</h3>
+          <p>Mozzarella, tonno, cipolla</p><strong>€ 7,00</strong></div>
+          <button class="add" type="button" data-id="13" aria-label="Aggiungi Tonno e Cipolla">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Zucchina</h3>
+          <p>Mozzarella, zucchine, guanciale</p><strong>€ 7,00</strong></div>
+          <button class="add" type="button" data-id="14" aria-label="Aggiungi Zucchina">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Primavera</h3>
+          <p>Mozzarella, rucola, pomodorini pachino, scaglie di parmigiano, olio d’oliva</p><strong>€ 7,00</strong></div>
+          <button class="add" type="button" data-id="15" aria-label="Aggiungi Primavera">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>4 Formaggi</h3>
+          <p>Mozzarella, scamorza, parmigiano, gorgonzola</p><strong>€ 7,00</strong></div>
+          <button class="add" type="button" data-id="16" aria-label="Aggiungi 4 Formaggi">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Romanista</h3>
+          <p>Mozzarella, pomodorini gialli e rossi, stracciatella, origano</p><strong>€ 9,00</strong></div>
+          <button class="add" type="button" data-id="17" aria-label="Aggiungi Romanista">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Mortadella</h3>
+          <p>Mozzarella, mortadella, stracciatella, granella di pistacchio</p><strong>€ 9,00</strong></div>
+          <button class="add" type="button" data-id="18" aria-label="Aggiungi Mortadella">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Tartufata</h3>
+          <p>Crema di tartufo, mozzarella, speck, provola</p><strong>€ 10,00</strong></div>
+          <button class="add" type="button" data-id="19" aria-label="Aggiungi Tartufata">+</button>
+        </article></div></section><section class="category" id="calzoni"><h2>Calzoni</h2><div class="products"><article class="product">
+          <div class="product-copy"><h3>Classico</h3>
+          <p>Mozzarella, prosciutto cotto</p><strong>€ 8,00</strong></div>
+          <button class="add" type="button" data-id="20" aria-label="Aggiungi Classico">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Rustico</h3>
+          <p>Mozzarella, salsiccia, funghi</p><strong>€ 8,00</strong></div>
+          <button class="add" type="button" data-id="21" aria-label="Aggiungi Rustico">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Verdure</h3>
+          <p>Mozzarella, melanzane, zucchine, peperoni</p><strong>€ 8,00</strong></div>
+          <button class="add" type="button" data-id="22" aria-label="Aggiungi Verdure">+</button>
+        </article></div></section><section class="category" id="pala"><h2>Pizza alla pala</h2><div class="products"><article class="product">
+          <div class="product-copy"><h3>Pizza alla pala Margherita</h3>
+          <p> </p><strong>€ 12,00</strong></div>
+          <button class="add" type="button" data-id="23" aria-label="Aggiungi Pizza alla pala Margherita">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Pizza alla pala gusti vari</h3>
+          <p> </p><strong>€ 14,00</strong></div>
+          <button class="add" type="button" data-id="24" aria-label="Aggiungi Pizza alla pala gusti vari">+</button>
+        </article></div></section><section class="category" id="bevande"><h2>Bevande</h2><div class="products"><article class="product">
+          <div class="product-copy"><h3>Acqua</h3>
+          <p> </p><strong>€ 1,00</strong></div>
+          <button class="add" type="button" data-id="25" aria-label="Aggiungi Acqua">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Coca-Cola lattina</h3>
+          <p> </p><strong>€ 2,00</strong></div>
+          <button class="add" type="button" data-id="26" aria-label="Aggiungi Coca-Cola lattina">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Fanta lattina</h3>
+          <p> </p><strong>€ 2,00</strong></div>
+          <button class="add" type="button" data-id="27" aria-label="Aggiungi Fanta lattina">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Sprite lattina</h3>
+          <p> </p><strong>€ 2,00</strong></div>
+          <button class="add" type="button" data-id="28" aria-label="Aggiungi Sprite lattina">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Tè freddo</h3>
+          <p> </p><strong>€ 3,00</strong></div>
+          <button class="add" type="button" data-id="29" aria-label="Aggiungi Tè freddo">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Monster</h3>
+          <p> </p><strong>€ 3,00</strong></div>
+          <button class="add" type="button" data-id="30" aria-label="Aggiungi Monster">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Powerade</h3>
+          <p> </p><strong>€ 3,00</strong></div>
+          <button class="add" type="button" data-id="31" aria-label="Aggiungi Powerade">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Birra Peroni 33 cl</h3>
+          <p> </p><strong>€ 2,00</strong></div>
+          <button class="add" type="button" data-id="32" aria-label="Aggiungi Birra Peroni 33 cl">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Birra Heineken bottiglia</h3>
+          <p> </p><strong>€ 3,00</strong></div>
+          <button class="add" type="button" data-id="33" aria-label="Aggiungi Birra Heineken bottiglia">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Birra Corona</h3>
+          <p> </p><strong>€ 3,00</strong></div>
+          <button class="add" type="button" data-id="34" aria-label="Aggiungi Birra Corona">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Birra Ceres</h3>
+          <p> </p><strong>€ 3,00</strong></div>
+          <button class="add" type="button" data-id="35" aria-label="Aggiungi Birra Ceres">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Birra Raffo</h3>
+          <p> </p><strong>€ 3,00</strong></div>
+          <button class="add" type="button" data-id="36" aria-label="Aggiungi Birra Raffo">+</button>
+        </article><article class="product">
+          <div class="product-copy"><h3>Birra Heineken 50 cl</h3>
+          <p> </p><strong>€ 4,00</strong></div>
+          <button class="add" type="button" data-id="37" aria-label="Aggiungi Birra Heineken 50 cl">+</button>
+        </article></div></section><section class="category" id="menu"><h2>Menù</h2><div class="products"><article class="product">
+          <div class="product-copy"><h3>Menù Margherita</h3>
+          <p>Pizza Margherita + Coca-Cola o Fanta + patatine</p><strong>€ 8,00</strong></div>
+          <button class="add" type="button" data-id="38" aria-label="Aggiungi Menù Margherita">+</button>
+        </article></div></section>
+<section id="checkout"><h2>Il tuo carrello</h2><div id="cartlines">Il carrello è vuoto.</div><p><b>Totale: <span id="total">€ 0,00</span></b></p>
+<h2>Dati per l’ordine</h2><form id="orderform">
+<label>Nome e cognome *</label><input required autocomplete="name" id="name" placeholder="Nome e cognome">
+<div class="row"><div><label>Telefono *</label><input required type="tel" autocomplete="tel" id="phone" placeholder="Telefono"></div><div><label>Servizio</label><select id="kind"><option>Consegna a domicilio</option><option>Ritiro in pizzeria</option></select></div></div>
+<label>Indirizzo (per consegna)</label><input id="address" autocomplete="street-address" placeholder="Via e numero civico">
+<div class="row"><div><label>Giorno *</label><input required type="date" id="day"></div><div><label>Orario *</label><input required type="time" id="time"></div></div>
+<label>Preferenze e note</label><textarea id="notes" rows="3" placeholder="Es. senza cipolla, ben cotta..."></textarea>
+<label>Pagamento</label><select><option>Pagamento alla consegna / al ritiro</option><option disabled>Pagamento online da attivare</option></select>
+<p class="hint">Demo: questo modulo non invia ancora ordini alla pizzeria. Pagamenti online e notifiche saranno attivati dopo il collegamento al sistema ordini. Non inserire dati di carta.</p>
+<button class="primary" type="submit">Prepara riepilogo</button></form><div id="result" class="welcome" hidden></div></section>
+</main><div class="cartbar"><div class="cartinfo"><small id="count">0 prodotti</small><b id="barTotal">€ 0,00</b></div><button class="primary" id="cartButton">Vai al carrello</button></div>
+<script>
+const items=[{"name": "Marinara", "price": 4.0}, {"name": "Amatriciana", "price": 6.0}, {"name": "Margherita", "price": 5.0}, {"name": "Sbriciolata", "price": 7.0}, {"name": "Diavola", "price": 6.0}, {"name": "Napoli", "price": 7.0}, {"name": "Contadina", "price": 7.0}, {"name": "Parmigiana", "price": 8.0}, {"name": "Bufalina", "price": 8.0}, {"name": "Mediterranea", "price": 9.0}, {"name": "Pizza bianca", "price": 3.0}, {"name": "Boscaiola", "price": 7.0}, {"name": "Ortolana", "price": 7.0}, {"name": "Tonno e Cipolla", "price": 7.0}, {"name": "Zucchina", "price": 7.0}, {"name": "Primavera", "price": 7.0}, {"name": "4 Formaggi", "price": 7.0}, {"name": "Romanista", "price": 9.0}, {"name": "Mortadella", "price": 9.0}, {"name": "Tartufata", "price": 10.0}, {"name": "Classico", "price": 8.0}, {"name": "Rustico", "price": 8.0}, {"name": "Verdure", "price": 8.0}, {"name": "Pizza alla pala Margherita", "price": 12.0}, {"name": "Pizza alla pala gusti vari", "price": 14.0}, {"name": "Acqua", "price": 1.0}, {"name": "Coca-Cola lattina", "price": 2.0}, {"name": "Fanta lattina", "price": 2.0}, {"name": "Sprite lattina", "price": 2.0}, {"name": "Tè freddo", "price": 3.0}, {"name": "Monster", "price": 3.0}, {"name": "Powerade", "price": 3.0}, {"name": "Birra Peroni 33 cl", "price": 2.0}, {"name": "Birra Heineken bottiglia", "price": 3.0}, {"name": "Birra Corona", "price": 3.0}, {"name": "Birra Ceres", "price": 3.0}, {"name": "Birra Raffo", "price": 3.0}, {"name": "Birra Heineken 50 cl", "price": 4.0}, {"name": "Menù Margherita", "price": 8.0}];const cart={};const fmt=n=>new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR'}).format(n);
+function update(){let ids=Object.keys(cart).filter(k=>cart[k]>0);let count=ids.reduce((s,k)=>s+cart[k],0),total=ids.reduce((s,k)=>s+items[k].price*cart[k],0);document.getElementById('count').textContent=count+' prodotti nel carrello';document.getElementById('barTotal').textContent=fmt(total);document.getElementById('total').textContent=fmt(total);document.getElementById('cartlines').innerHTML=ids.length?ids.map(k=>`<div class="line"><span>${items[k].name}</span><span class="qty"><button type="button" data-dec="${k}">−</button> ${cart[k]} <button type="button" data-inc="${k}">+</button></span><b>${fmt(items[k].price*cart[k])}</b></div>`).join(''):'Il carrello è vuoto.';}
+document.querySelectorAll('.add').forEach(b=>b.addEventListener('click',()=>{let k=b.dataset.id;cart[k]=(cart[k]||0)+1;update();}));
+document.addEventListener('click',e=>{if(e.target.dataset.dec!==undefined){let k=e.target.dataset.dec;cart[k]--;if(cart[k]<=0)delete cart[k];update()}if(e.target.dataset.inc!==undefined){let k=e.target.dataset.inc;cart[k]++;update()}});
+document.getElementById('cartButton').onclick=()=>{document.getElementById('checkout').classList.add('open');document.getElementById('checkout').scrollIntoView({behavior:'smooth'});};
+document.getElementById('kind').onchange=e=>{document.getElementById('address').required=e.target.value==='Consegna a domicilio';};
+document.getElementById('orderform').onsubmit=e=>{e.preventDefault();if(!Object.keys(cart).length){alert('Aggiungi prima un prodotto al carrello.');return}let total=Object.keys(cart).reduce((s,k)=>s+items[k].price*cart[k],0);let r=document.getElementById('result');r.hidden=false;r.textContent='Riepilogo dimostrativo creato per '+document.getElementById('name').value+'. Totale '+fmt(total)+'. Nessun ordine è stato inviato.';r.scrollIntoView({behavior:'smooth'});};
+update();
+</script></body></html>
